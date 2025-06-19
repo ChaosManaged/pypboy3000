@@ -29,6 +29,7 @@ class Pypboy(game.core.Engine):
 
     def init_children(self):
         self.background = pygame.image.load('images/overlay.png').convert_alpha()
+        self.background = pygame.image.load('/home/pi/pypboy3000/images/overlay.png').convert_alpha()
         self.background.fill(config.TINTCOLOUR, None, pygame.BLEND_RGB_MULT)
 
 

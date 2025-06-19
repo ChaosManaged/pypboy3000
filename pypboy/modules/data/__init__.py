@@ -28,5 +28,6 @@ class Module(BaseModule):
     def handle_resume(self):
         self.pypboy.header.headline = self.label
         self.pypboy.header.title = ["Santa Clarita"]
+        self.pypboy.header.title = ["Peachtree Center"]
         self.active.handle_action("resume")
         

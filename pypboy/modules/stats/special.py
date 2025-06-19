@@ -13,6 +13,7 @@ class Module(pypboy.SubModule):
         super(Module, self).__init__(*args, **kwargs)
 
         self.stat = Stat('images/special_strength.png')
+        self.stat = Stat('/home/pi/pypboy3000/images/special_strength.png')
         self.stat.rect[0] = 4
         self.stat.rect[1] = 40
         self.add(self.stat)
@@ -39,30 +40,37 @@ class Module(pypboy.SubModule):
 
     def show_str(self):
         self.changeStat('images/special_strength.png')
+        self.changeStat('/home/pi/pypboy3000/images/special_strength.png')
         print("Strength")
 
     def show_per(self):
         self.changeStat('images/special_perception.png')
+        self.changeStat('/home/pi/pypboy3000/images/special_perception.png')
         print("Perception")
 
     def show_end(self):
         self.changeStat('images/special_endurance.png')
+        self.changeStat('/home/pi/pypboy3000/images/special_endurance.png')
         print("Endurance")
 
     def show_cha(self):
         self.changeStat('images/special_charisma.png')
+        self.changeStat('/home/pi/pypboy3000/images/special_charisma.png')
         print("Charisma")
 
     def show_int(self):
         self.changeStat('images/special_intelligence.png')
+        self.changeStat('/home/pi/pypboy3000/images/special_intelligence.png')
         print("Intelligence")
 
     def show_agi(self):
         self.changeStat('images/special_agility.png')
+        self.changeStat('/home/pi/pypboy3000/images/special_agility.png')
         print("Agility")
 
     def show_luc(self):
         self.changeStat('images/special_luck.png')
+        self.changeStat('/home/pi/pypboy3000/images/special_luck.png')
         print("Luck")
 
 class Stat(game.Entity):

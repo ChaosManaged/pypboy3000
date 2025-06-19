@@ -267,46 +267,59 @@ class RadioStation(game.Entity):
         else:
             return self.label >= other.label
 
+class RadioOff(RadioStation):
+    def __init__(self, *args, **kwargs):
+        self.label = 'Radio Off'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/RadioOff/'
+        super(RadioOff, self).__init__(self, *args, **kwargs)
+        
 class ClassicalRadio(RadioStation):
     def __init__(self, *args, **kwargs):
         self.label = 'Classical Radio'
         self.directory = 'sounds/radio/Classical/'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/Classical/'
         super(ClassicalRadio, self).__init__(self, *args, **kwargs)
 
 class DiamondCityRadio(RadioStation):
     def __init__(self, *args, **kwargs):
         self.label = 'Diamond City Radio'
         self.directory = 'sounds/radio/DCR/'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/DCR/'
         super(DiamondCityRadio, self).__init__(self, *args, **kwargs)
 
 class EnclaveRadio(RadioStation):
     def __init__(self, *args, **kwargs):
         self.label = 'Enclave Radio'
         self.directory = 'sounds/radio/Enclave/'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/Enclave/'
         super(EnclaveRadio, self).__init__(self, *args, **kwargs)
 
 class InstituteRadio(RadioStation):
     def __init__(self, *args, **kwargs):
         self.label = 'Institute Radio'
         self.directory = 'sounds/radio/Institute/'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/Institute/'
         super(InstituteRadio, self).__init__(self, *args, **kwargs)
 
 class MinutemenRadio(RadioStation):
     def __init__(self, *args, **kwargs):
         self.label = 'Minutemen Radio'
         self.directory = 'sounds/radio/Minutemen/'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/Minutemen/'
         super(MinutemenRadio, self).__init__(self, *args, **kwargs)
 
 class Vault101Radio(RadioStation):
     def __init__(self, *args, **kwargs):
         self.label = 'Vault 101 Radio'
         self.directory = 'sounds/radio/V101/'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/V101/'
         super(Vault101Radio, self).__init__(self, *args, **kwargs)
 
 class ViolinRadio(RadioStation):
     def __init__(self, *args, **kwargs):
         self.label = 'Violin Radio'
         self.directory = 'sounds/radio/Violin/'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/Violin/'
         super(ViolinRadio, self).__init__(self, *args, **kwargs)
 
 class F3Radio(RadioStation):
@@ -314,4 +327,33 @@ class F3Radio(RadioStation):
         
         self.label = 'F3 Radio'
         self.directory = 'sounds/radio/F3/'
+        super(F3Radio, self).__init__(self, *args, **kwargs)        self.directory = '/home/pi/pypboy3000/sounds/radio/F3/'
         super(F3Radio, self).__init__(self, *args, **kwargs)
+
+class MojaveMusicRadio(RadioStation):
+    def __init__(self, *args, **kwargs):
+        
+        self.label = 'Mojave Music Radio'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/Mojave/'
+        super(MojaveMusicRadio, self).__init__(self, *args, **kwargs)
+
+class GalaxyNewsRadio(RadioStation):
+    def __init__(self, *args, **kwargs):
+        
+        self.label = 'Galaxy News Radio'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/gnr/'
+        super(GalaxyNewsRadio, self).__init__(self, *args, **kwargs)
+
+class AppalachiaRadio(RadioStation):
+    def __init__(self, *args, **kwargs):
+        
+        self.label = 'Appalachia Radio'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/Appalachia/'
+        super(AppalachiaRadio, self).__init__(self, *args, **kwargs)
+
+class DragonConRadio(RadioStation):
+    def __init__(self, *args, **kwargs):
+        
+        self.label = 'Dragon Con Radio'
+        self.directory = '/home/pi/pypboy3000/sounds/radio/DCON/'
+        super(DragonConRadio, self).__init__(self, *args, **kwargs)

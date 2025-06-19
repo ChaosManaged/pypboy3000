@@ -29,4 +29,5 @@ class Module(BaseModule):
 
         self.pypboy.header.headline = self.label
         self.pypboy.header.title = ["AP  75/99","HP  159/314", "LVL 31"]
+        self.pypboy.header.title = ["AP  75/99","HP  310/314", "LVL 15"]
         self.active.handle_action("resume")

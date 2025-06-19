@@ -1,7 +1,11 @@
 import pygame
+from rotary_class import RotaryEncoder
 
 PLAYERNAME = "Markuspwn"
 PLAYERLEVEL = 10
+app = None #This will be set later from main.py
+PLAYERNAME = "Arkangel"
+PLAYERLEVEL = 15
 WIDTH = 480
 HEIGHT = 320
 
@@ -14,6 +18,8 @@ GPIO_AVAILABLE = True
 RADIO_PLAYING = True
 QUICKLOAD = False
 LOAD_CACHED_MAP = True
+QUICKLOAD = True
+LOAD_CACHED_MAP = False
 # Main
 
 TINTCOLOUR = pygame.Color(26, 255, 128) # Green
@@ -27,10 +33,13 @@ TINTCOLOUR = pygame.Color(26, 255, 128) # Green
 #MAP_FOCUS = (-118.5723894,34.3917171)#CodeNinjasValencia
 #MAP_FOCUS = (32.7157, 117.1611)
 MAP_FOCUS = (-92.1943197, 38.5653437)
+#MAP_FOCUS = (-92.1943197, 38.5653437)
+MAP_FOCUS = (-84.386176, 33.7604616)
 
 WORLD_MAP_FOCUS = 0.07 #Needed to handle the 50k node limit from OSM
 
 LOAD_CACHED_MAP = True
+LOAD_CACHED_MAP = False
 SOUND_ENABLED = True
 
 EVENTS = {
@@ -49,6 +58,8 @@ ACTIONS = {
     pygame.K_F3: "module_data",
     pygame.K_1:	"knob_1",
     pygame.K_2: "knob_2",
+    pygame.K_1:	"knob_down",
+    pygame.K_2: "knob_up",
     pygame.K_3: "knob_3",
     pygame.K_4: "knob_4",
     pygame.K_5: "knob_5",
@@ -68,7 +79,50 @@ GPIO_ACTIONS = {
 	17: "dial_up", #GPIO 24
 	22: "knob_down", #GPIO 4
 	27: "knob_up", #GPIO 17
+	#4: "dial_down", #GPIO 23
+	#17: "dial_up", #GPIO 24
+	#22: "knob_down", #GPIO 4
+	#27: "knob_up", #GPIO 17
+    21: "module_data", #GPIO 21
+    20: "module_items", #GPIO 20
 }
+
+# Define GPIO inputs
+dial_up = 26 	# Pin 8 
+dial_down = 19	# Pin 10
+Data = 21	# Pin 7
+knob_up = 27 #GPIO 27
+knob_down = 22 #GPIO 22
+Items = 20 #GPIO 20
+
+# These are the rotary knob events
+def dial_event(event):
+    print(f"[DIAL] Event triggered: {event}")
+    if app:
+        app.handle_action(event)
+        
+def knob_event(event):
+    print(f"[KNOB] Event triggered: {event}")
+    if app:
+        app.handle_action(event)
+    return
+
+# Define the switch
+dial = RotaryEncoder(dial_up,dial_down,"Dial",dial_event)
+knob = RotaryEncoder(knob_up,knob_down,"Knob",knob_event)
+
+#print("Pin A "+ str(dial_up))
+#print("Pin B "+ str(dial_down))
+#print("BUTTON "+ str(Data))
+
+#print("Pin A "+ str(knob_up))
+#print("Pin B "+ str(knob_down))
+#print("BUTTON "+ str(Items))
+
+# Listen
+
+#while True:
+	#time.sleep(0.5)
 
 # LEDs
 # pin 18, 23, 24,
@@ -87,6 +141,19 @@ MAP_ICONS = {
     "city": 		pygame.image.load('images/map_icons/city.png'),
     "office": 		pygame.image.load('images/map_icons/office.png'),
     "sewer": 		pygame.image.load('images/map_icons/sewer.png'),
+    "camp": 		pygame.image.load('/home/pi/pypboy3000/images/map_icons/camp.png'),
+    "factory": 		pygame.image.load('/home/pi/pypboy3000/images/map_icons/factory.png'),
+    "metro": 		pygame.image.load('/home/pi/pypboy3000/images/map_icons/metro.png'),
+    "misc": 		pygame.image.load('/home/pi/pypboy3000/images/map_icons/misc.png'),
+    "monument": 	pygame.image.load('/home/pi/pypboy3000/images/map_icons/monument.png'),
+    "vault": 		pygame.image.load('/home/pi/pypboy3000/images/map_icons/vault.png'),
+    "settlement": 	pygame.image.load('/home/pi/pypboy3000/images/map_icons/settlement.png'),
+    "ruin": 		pygame.image.load('/home/pi/pypboy3000/images/map_icons/ruin.png'),
+    "cave": 		pygame.image.load('/home/pi/pypboy3000/images/map_icons/cave.png'),
+    "landmark": 	pygame.image.load('/home/pi/pypboy3000/images/map_icons/landmark.png'),
+    "city": 		pygame.image.load('/home/pi/pypboy3000/images/map_icons/city.png'),
+    "office": 		pygame.image.load('/home/pi/pypboy3000/images/map_icons/office.png'),
+    "sewer": 		pygame.image.load('/home/pi/pypboy3000/images/map_icons/sewer.png'),
 }
 
 AMENITIES = {
@@ -103,14 +170,33 @@ AMENITIES = {
     'bank': 			MAP_ICONS['monument'],
     'townhall': 		MAP_ICONS['monument'],
 #	'bicycle_parking': 	MAP_ICONS['misc'],
+    'pub': 				MAP_ICONS['city'],
+    'nightclub': 		MAP_ICONS['settlement'],
+    'bar': 				MAP_ICONS['city'],
+    'conference_centre':MAP_ICONS['vault'],
+#   'fast_food': 		MAP_ICONS['settlement'],
+#	'cafe': 			MAP_ICONS['settlement'],
+#	'drinking_water':  	MAP_ICONS['sewer'],
+#   'restaurant': 		MAP_ICONS['settlement'],
+#   'cinema': 			MAP_ICONS['office'],
+    'pharmacy': 		MAP_ICONS['camp'],
+#   'school': 			MAP_ICONS['office'],
+#   'bank': 			MAP_ICONS['monument'],
+#   'townhall': 		MAP_ICONS['monument'],
+#   'bicycle_parking': 	MAP_ICONS['misc'],
 #	'place_of_worship': MAP_ICONS['misc'],
-	'theatre': 			MAP_ICONS['office'],
+#	'theatre': 			MAP_ICONS['office'],
 #	'bus_station': 		MAP_ICONS['misc'],
 #	'parking': 			MAP_ICONS['misc'],
 #	'fountain': 		MAP_ICONS['misc'],
 #	'marketplace': 		MAP_ICONS['misc'],
 #	'atm': 				MAP_ICONS['misc'],
     'misc':             MAP_ICONS['misc']
+	'parking': 			MAP_ICONS['metro'],
+	'fountain': 		MAP_ICONS['sewer'],
+	'arts_centre': 		MAP_ICONS['monument'],
+	'atm': 				MAP_ICONS['misc'],
+#   'misc':             MAP_ICONS['misc']
 }
 
 INVENTORY_OLD = [
@@ -190,10 +276,13 @@ pygame.font.init()
 FONTS = {}
 for x in range(10, 28):
     FONTS[x] = pygame.font.Font('monofonto.ttf', x)
+    FONTS[x] = pygame.font.Font('/home/pi/pypboy3000/fonts/monofonto.ttf', x)
 
 
 kernedFontName = 'fonts/monofonto-kerned.ttf'
 monoFontName = 'fonts/monofonto.ttf'
+kernedFontName = '/home/pi/pypboy3000/fonts/monofonto-kerned.ttf'
+monoFontName = '/home/pi/pypboy3000/fonts/monofonto.ttf'
 
 # Scale font-sizes to chosen resolution:
 FONT_SML = pygame.font.Font(kernedFontName, int (HEIGHT * (12.0 / 360)))
@@ -204,4 +293,4 @@ MONOFONT = pygame.font.Font(monoFontName, int (HEIGHT * (16.0 / 360.0)))
 tempImg = MONOFONT.render("X", True, TINTCOLOUR, (0, 0, 0))
 charHeight = tempImg.get_height()
 charWidth = tempImg.get_width()
-del tempImg
+del tempImgdel tempImg

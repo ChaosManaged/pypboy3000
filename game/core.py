@@ -27,8 +27,10 @@ class Engine(object):
 
         # self.window = pygame.display.set_mode((width, height),pygame.FULLSCREEN)
         self.window = pygame.display.set_mode((width, height))
+        screen = pygame.display.set_mode((width, height), pygame.FULLSCREEN)
+        # self.window = pygame.display.set_mode((width, height))
         self.screen = pygame.display.get_surface()
-        pygame.display.set_mode(self.screenSize)
+        # pygame.display.set_mode(self.screenSize)
 
 
         # # Block queuing for unused events:
@@ -54,6 +56,7 @@ class Engine(object):
         self.lineCount = 80  # 48 60 80
         self.lineHeight = config.HEIGHT // self.lineCount
         scanline = pygame.transform.smoothscale(pygame.image.load('images/pipboyscanlines.png').convert_alpha(), (config.WIDTH, self.lineHeight))
+        scanline = pygame.transform.smoothscale(pygame.image.load('/home/pi/pypboy3000/images/pipboyscanlines.png').convert_alpha(), (config.WIDTH, self.lineHeight))
 
         self.scanLines = pygame.Surface(self.canvasSize)
         self.scanLines.fill(config.TINTCOLOUR, None, pygame.BLEND_RGB_MULT)
@@ -74,6 +77,8 @@ class Engine(object):
         # Start humming sound:
         if config.SOUND_ENABLED:
             self.humSound = pygame.mixer.Sound('sounds/pipboy_hum.wav')
+            self.humSound = pygame.mixer.Sound('/home/pi/pypboy3000/sounds/pipboy_hum.wav')
+            self.humSound.set_volume(.3)
             self.humSound.play(loops=-1)
             self.humVolume = self.humSound.get_volume()
 
@@ -81,6 +86,7 @@ class Engine(object):
 
             self.distortLineHeight = (config.HEIGHT // 4)
             self.distortLine = pygame.transform.smoothscale(pygame.image.load('images/pipboydistorteffectmap.png'), (config.WIDTH, self.distortLineHeight))
+            self.distortLine = pygame.transform.smoothscale(pygame.image.load('/home/pi/pypboy3000/images/pipboydistorteffectmap.png'), (config.WIDTH, self.distortLineHeight))
             self.distortLine = self.distortLine.convert()
             self.distortY = -self.distortLineHeight
             self.distortSpeed = (config.HEIGHT / 40)
@@ -159,9 +165,11 @@ class Engine(object):
             cmdLine.printText("\tDownloading World map...")
             if config.SOUND_ENABLED:
                 pygame.mixer.Sound('sounds/start.wav').play()
+                pygame.mixer.Sound('/home/pi/pypboy3000/sounds/start.wav').play()
 
             if config.SOUND_ENABLED:
                 pygame.mixer.Sound('sounds/stop.wav').play()
+                pygame.mixer.Sound('/home/pi/pypboy3000/sounds/stop.wav').play()
 
             cmdLine.printText(">PIP-BOY.INIT")
 
@@ -171,6 +179,7 @@ class Engine(object):
 
             if config.SOUND_ENABLED:
                 pygame.mixer.Sound('sounds/start.wav').play()
+                pygame.mixer.Sound('/home/pi/pypboy3000/sounds/start.wav').play()
             print("END INIT PROCESS")
 
 
@@ -178,10 +187,12 @@ class Engine(object):
     def showBootLogo(self):
 
         bootLogo = pygame.image.load('images/bootupLogo.png')
+        bootLogo = pygame.image.load('/home/pi/pypboy3000/images/bootupLogo.png')
         self.focusInDraw(bootLogo)
 
         if config.SOUND_ENABLED:
             bootSound = pygame.mixer.Sound('sounds/falloutBootup.wav')
+            bootSound = pygame.mixer.Sound('/home/pi/pypboy3000/sounds/falloutBootup.wav')
             bootSound.play()
 
         pygame.display.update()
@@ -294,4 +305,4 @@ class Entity(pygame.sprite.DirtySprite):
             return 0
 
     def __str__(self):
-        return "Entity"
+        return "Entity"        return "Entity"

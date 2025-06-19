@@ -45,5 +45,6 @@ except:
 
 if __name__ == "__main__":
     boy = Pypboy('Pip-Boy 3000', config.WIDTH, config.HEIGHT)
+    config.app = boy #Connect the Pypboy instance to the rotary callback system
     print("RUN")
     boy.run()

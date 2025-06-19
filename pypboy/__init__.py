@@ -46,6 +46,7 @@ class BaseModule(game.EntityGroup):
         }
         if config.SOUND_ENABLED:
             self.module_change_sfx = pygame.mixer.Sound('sounds/module_change.ogg')
+            self.module_change_sfx = pygame.mixer.Sound('/home/pi/pypboy3000/sounds/module_change.ogg')
 
     def move(self, x, y):
         super(BaseModule, self).move(x, y)
@@ -54,6 +55,7 @@ class BaseModule(game.EntityGroup):
 
     def switch_submodule(self, module):
         if hasattr(self, 'active') and self.active:
+        if hasattr(self, 'active') and self.active in self:
             self.active.handle_action("pause")
             self.remove(self.active)
         if len(self.submodules) > module:
@@ -145,6 +147,7 @@ class SubModule(game.EntityGroup):
 
         if config.SOUND_ENABLED:
             self.submodule_change_sfx = pygame.mixer.Sound('sounds/submodule_change.ogg')
+            self.submodule_change_sfx = pygame.mixer.Sound('/home/pi/pypboy3000/sounds/submodule_change.ogg')
 
     def handle_action(self, action, value=0):
         if action.startswith("dial_"):

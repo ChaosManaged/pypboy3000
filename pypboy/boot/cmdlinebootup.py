@@ -57,6 +57,7 @@ class CmdLineClass:
                 if (math.fmod(charNum, 6) == 0) or (lastChar):
                     if config.SOUND_ENABLED:
                         self.module_change_sfx = pygame.mixer.Sound('sounds/module_change.ogg')
+                        self.module_change_sfx = pygame.mixer.Sound('/home/pi/pypboy3000/sounds/module_change.ogg')
                         self.module_change_sfx.play()
 
                     charImage = config.MONOFONT.render(drawChars, True, config.TINTCOLOUR, (0, 0, 0))

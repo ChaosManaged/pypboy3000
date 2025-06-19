@@ -7,6 +7,7 @@ from pypboy.modules.data import entities
 class Module(pypboy.SubModule):
     label = "Local Map"
     title = "Cosplacon"
+    title = "Dragon Con"
     zoom = 0.003
 
     def __init__(self, *args, **kwargs):
@@ -56,4 +57,4 @@ class Module(pypboy.SubModule):
         self.mapgrid.rect[1] = 40
         self.parent.pypboy.header.headline = "DATA"
         self.parent.pypboy.header.title = [self.title]
-    
+        
